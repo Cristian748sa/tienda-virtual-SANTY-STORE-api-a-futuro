@@ -1,1 +1,1 @@
-
+El directorio api/ está destinado a ofrecer una capa de servicios independiente, ideal para integraciones futuras, microservicios o ampliaciones externas.
