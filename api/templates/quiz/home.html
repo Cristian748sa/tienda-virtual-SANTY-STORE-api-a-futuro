@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cuestionarios</title>
+</head>
+<body>
+  <h1>Quizzes de Programación</h1>
+  <ul id="quiz-list"></ul>
+
+<ul id="quiz-list"></ul>
+<div id="questions"></div>
+
+<script>
+  fetch('/api/quizzes/?format=json')
+    .then(res => res.json())
+    .then(data => {
+      const ul = document.getElementById('quiz-list');
+      data.results.forEach(q => {
+        const li = document.createElement('li');
+        li.textContent = q.title;
+        li.style.cursor = 'pointer';
+        li.addEventListener('click', () => {
+          fetch(`/quiz/api/questions/?quiz=${q.id}&format=json`)
+            .then(r => r.json())
+            .then(qs => {
+              const div = document.getElementById('questions');
+              div.innerHTML = `<h2>Preguntas de “${q.title}”</h2>`;
+              const list = document.createElement('ol');
+              qs.results.forEach(p => {
+                const item = document.createElement('li');
+                item.textContent = p.title;
+                list.appendChild(item);
+              });
+              div.appendChild(list);
+            });
+        });
+        ul.appendChild(li);
+      });
+    });
+</script>
+</body>
+</html>
