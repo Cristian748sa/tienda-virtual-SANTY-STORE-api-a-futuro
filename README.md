@@ -1,0 +1,2 @@
+# tienda-virtual-SANTY-STORE-api-a-futuro
+DESARROLLADO PARA DISEÑO DE PLATAFORMAS I
